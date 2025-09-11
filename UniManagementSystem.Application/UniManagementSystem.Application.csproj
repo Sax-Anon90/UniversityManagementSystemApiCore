@@ -9,4 +9,8 @@
     <ProjectReference Include="..\UniManagementSystem.Data\UniManagementSystem.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\" />
+  </ItemGroup>
+
 </Project>

@@ -9,4 +9,10 @@
     <ProjectReference Include="..\UniManagementSystem.Application\UniManagementSystem.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DbContext\" />
+    <Folder Include="ServiceRegistrations\" />
+    <Folder Include="RepositoryImplementations\" />
+  </ItemGroup>
+
 </Project>
