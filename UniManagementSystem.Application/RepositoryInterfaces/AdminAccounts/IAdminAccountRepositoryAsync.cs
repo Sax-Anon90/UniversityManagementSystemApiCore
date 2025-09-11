@@ -15,6 +15,8 @@ namespace UniManagementSystem.Application.RepositoryInterfaces.AdminAccounts
         Task<AdminAccount> CreateAdminAccountAsync(AdminAccount adminAccountToCreate);
         Task<AdminAccount> UpdateAdminAccountAsync(AdminAccount adminAccountToUpdate);
         Task<AdminAccount> DeleteAdminAccountAsync(AdminAccount adminAccountToDelete);
+        Task<AdminAccount> GetAdminAccountByEmailAsync(string email);
+        
 
     }
 }

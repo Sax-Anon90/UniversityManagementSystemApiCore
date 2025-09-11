@@ -12,7 +12,7 @@ namespace UniManagementSystem.Application.RepositoryInterfaces.AdminAccountRoles
     {
         Task<IEnumerable<AdminAccountRoleViewModel>> GetAllAdminAccountRolesByAdminAccountId(int adminAccountId);
         Task<AdminAccountRole> CreateAdminAccountRole(AdminAccountRole adminAccountRoleToCreate);
-        Task<AdminAccountRole> DeleteAdminAccountRole(AdminAccount adminAccountToDelete);
+        Task<AdminAccountRole> DeleteAdminAccountRole(AdminAccountRole adminAccountToDelete);
         Task<IEnumerable<string>> GetAllAdminAccountRoleNamesByAdminAccountIdAsync(int adminAccountId);
     }
 }

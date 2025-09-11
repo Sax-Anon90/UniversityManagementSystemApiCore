@@ -27,7 +27,7 @@ namespace UniManagementSystem.Persistence.RepositoryImplementations.AdminAccount
             return adminAccountRoleToCreate;
         }
 
-        public async Task<AdminAccountRole> DeleteAdminAccountRole(AdminAccount adminAccountToDelete)
+        public async Task<AdminAccountRole> DeleteAdminAccountRole(AdminAccountRole adminAccountToDelete)
         {
             var AdminAccountRole = await _dbContext.AdminAccountRoles
                 .AsNoTracking()

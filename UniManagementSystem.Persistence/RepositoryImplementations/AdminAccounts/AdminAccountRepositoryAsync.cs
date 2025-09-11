@@ -43,6 +43,18 @@ namespace UniManagementSystem.Persistence.RepositoryImplementations.AdminAccount
             return AdminAccount;
         }
 
+        public async Task<AdminAccount> GetAdminAccountByEmailAsync(string email)
+        {
+            var AdminAccount = await _dbContext.AdminAccounts.AsNoTracking().SingleOrDefaultAsync(x => x.AdminEmail == email);
+
+            if (AdminAccount is null)
+            {
+                return new AdminAccount() { Id = 0 };
+            }
+
+            return AdminAccount;
+        }
+
         public async Task<AdminAccountViewModel> GetAdminAccountByIdAsync(int adminAccountId)
         {
             var AdminAccount = await _dbContext.StudentAccounts.Select(x => new AdminAccountViewModel()
