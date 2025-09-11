@@ -37,7 +37,7 @@ namespace UniManagementSystem.Persistence.RepositoryImplementations.Courses
             }
 
             course.IsActive = false;
-            course.DateInactive = courseToDelete.DateInactive;
+            course.DateInactive = DateTime.UtcNow;
             _dbContext.Courses.Update(course);
             await _dbContext.SaveChangesAsync();
 
@@ -76,6 +76,7 @@ namespace UniManagementSystem.Persistence.RepositoryImplementations.Courses
 
             course.IsActive = true;
             course.Name = courseToUpdate.Name;
+            course.DateModified = courseToUpdate.DateModified;
             _dbContext.Courses.Update(course);
             await _dbContext.SaveChangesAsync();
             return course;
