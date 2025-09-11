@@ -14,6 +14,12 @@ namespace UniManagementSystem.API.Controllers.v1.Courses
             return Ok(await Mediator.Send(new GetAllCoursesQuery()));
         }
 
+        [HttpGet("courseCategory/{courseCategoryId}")]
+        public async Task<IActionResult> GetAllCoursesByCourseCategoryId(int courseCategoryId)
+        {
+            return Ok(await Mediator.Send(new GetAllCoursesByCourseCategoryIdQuery() { CourseCategoryId = courseCategoryId }));
+        }
+
         [HttpPost]
         public async Task<IActionResult> CreateCourse([FromBody] CreateCourseCommand command)
         {
