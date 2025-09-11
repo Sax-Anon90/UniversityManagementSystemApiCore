@@ -1,0 +1,36 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using System.Net;
+using UniManagementSystem.API.Controllers.v1.BaseApiController;
+using UniManagementSystem.Application.Features.Courses.Commands;
+using UniManagementSystem.Application.Features.Courses.Queries;
+
+namespace UniManagementSystem.API.Controllers.v1.Courses
+{
+    public class CourseController : BaseController
+    {
+        [HttpGet]
+        public async Task<IActionResult> GetAllCourses()
+        {
+            return Ok(await Mediator.Send(new GetAllCoursesQuery()));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateCourse([FromBody] CreateCourseCommand command)
+        {
+            var result = await Mediator.Send(command);
+
+            return StatusCode((int)HttpStatusCode.Created, result);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateCourse([FromBody] UpdateCourseCommand command)
+        {
+            var result = await Mediator.Send(command);
+
+            if (result.StatusCode == (int)HttpStatusCode.NotFound)
+                return BadRequest(result);
+
+            return StatusCode((int)HttpStatusCode.Created, result);
+        }
+    }
+}

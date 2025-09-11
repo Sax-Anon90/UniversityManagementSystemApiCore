@@ -31,12 +31,12 @@ namespace UniManagementSystem.API.Controllers.v1.StudentAccounts
         [HttpPost]
         public async Task<IActionResult> RegisterStudentAccount([FromBody] RegisterStudentAccountCommand command)
         {
-            var result = await Mediator.Send(command);
+                var result = await Mediator.Send(command);
 
-            if (result.StatusCode == (int)HttpStatusCode.BadRequest)
-                return BadRequest(result);
+                if (result.StatusCode == (int)HttpStatusCode.BadRequest)
+                    return BadRequest(result);
 
-            return StatusCode((int)HttpStatusCode.Created, result);
+                return StatusCode((int)HttpStatusCode.Created, result);
         }
 
         [HttpPut]
