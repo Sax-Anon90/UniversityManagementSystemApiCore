@@ -30,7 +30,7 @@ namespace UniManagementSystem.Persistence.RepositoryImplementations.StudentAccou
             var studentAccount = await _dbContext.StudentAccounts.AsNoTracking()
                 .SingleOrDefaultAsync(x => x.Id == studentAccountToRemove.Id);
 
-            if (studentAccountToRemove is null)
+            if (studentAccount is null)
             {
                 return new StudentAccount() { Id = 0 };
             }
@@ -87,7 +87,7 @@ namespace UniManagementSystem.Persistence.RepositoryImplementations.StudentAccou
 
             }).SingleOrDefaultAsync(x => x.Id == studentAccountId);
 
-            if (studentAccount is not null)
+            if (studentAccount is null)
             {
                 return new StudentAccountViewModel() { Id = 0 };
             }
