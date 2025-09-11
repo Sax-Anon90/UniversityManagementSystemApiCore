@@ -11,6 +11,7 @@ namespace UniManagementSystem.Persistence.RepositoryImplementations.AdminAccount
 {
     public class AdminAccountRoleRepositoryAsync : IAdminAccountRoleRepositoryAsync
     {
+        
         public AdminAccountRoleRepositoryAsync()
         {
             

@@ -10,7 +10,6 @@ namespace UniManagementSystem.Application.RepositoryInterfaces.CourseEnrollments
 {
     public interface ICourseEnrollmentRepositoryAsync
     {
-        Task<IEnumerable<CourseEnrollmentViewModel>> GetAllStudentCourseEnrollmentsByStudentIdAsync(int studentId);
         Task<CourseEnrollment> CreateCourseEnrollment(CourseEnrollment courseEnrollmentToCreate);
         Task<CourseEnrollment> DeleteCourseEnrollment(CourseEnrollment courseEnrollmentToRemove);
         Task<IEnumerable<string>> GetAllCourseEnrollmentNameByStudentIdAsync(int studentId);

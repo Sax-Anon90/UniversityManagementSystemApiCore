@@ -11,6 +11,7 @@ namespace UniManagementSystem.Data.DomainModels.ViewModels.CourseEnrollments
     {
         public int Id { get; set; }
         public int StudentId { get; set; }
+        public string StudentNumber { get; set; }
         public int CourseId { get; set; }
         public string StudentFullName { get; set; }
         public string CourseName { get; set; }
