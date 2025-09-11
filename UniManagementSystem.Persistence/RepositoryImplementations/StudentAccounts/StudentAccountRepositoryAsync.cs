@@ -59,7 +59,9 @@ namespace UniManagementSystem.Persistence.RepositoryImplementations.StudentAccou
                 DateInactive = x.DateInactive
 
 
-            }).ToListAsync();
+            })
+            .AsNoTracking()
+            .ToListAsync();
 
             if (!studentAccounts.Any())
             {
@@ -85,7 +87,7 @@ namespace UniManagementSystem.Persistence.RepositoryImplementations.StudentAccou
                 DateInactive = x.DateInactive
 
 
-            }).SingleOrDefaultAsync(x => x.Id == studentAccountId);
+            }).AsNoTracking().SingleOrDefaultAsync(x => x.Id == studentAccountId);
 
             if (studentAccount is null)
             {

@@ -51,7 +51,9 @@ namespace UniManagementSystem.Persistence.RepositoryImplementations.Roles
                 DateCreated = x.DateCreated,
                 DateModified = x.DateModified,
                 DateInactive = x.DateInactive,
-            }).ToListAsync();
+            })
+            .AsNoTracking()
+            .ToListAsync();
 
             if (!roles.Any())
             {
@@ -69,7 +71,7 @@ namespace UniManagementSystem.Persistence.RepositoryImplementations.Roles
             {
                 return new Role() { Id = 0 };
             }
-            
+
             role.IsActive = true;
             role.Name = roleToUpdate.Name;
             _dbContext.Roles.Update(role);

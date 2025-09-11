@@ -55,7 +55,9 @@ namespace UniManagementSystem.Persistence.RepositoryImplementations.Courses
                 DateCreated = x.DateCreated,
                 DateModified = x.DateModified,
                 DateInactive = x.DateInactive,
-            }).ToListAsync();
+            })
+            .AsNoTracking()
+            .ToListAsync();
 
             if (!courses.Any())
             {

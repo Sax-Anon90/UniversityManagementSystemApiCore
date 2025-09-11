@@ -58,7 +58,7 @@ namespace UniManagementSystem.Persistence.RepositoryImplementations.AdminAccount
                 DateInactive = x.DateInactive
 
 
-            }).SingleOrDefaultAsync(x => x.Id == adminAccountId);
+            }).AsNoTracking().SingleOrDefaultAsync(x => x.Id == adminAccountId);
 
             if (AdminAccount is null)
             {
@@ -83,7 +83,9 @@ namespace UniManagementSystem.Persistence.RepositoryImplementations.AdminAccount
                 DateInactive = x.DateInactive
 
 
-            }).ToListAsync();
+            })
+            .AsNoTracking()
+            .ToListAsync();
 
             if (AdminAccounts is null)
             {

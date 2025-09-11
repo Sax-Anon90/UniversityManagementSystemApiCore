@@ -12,6 +12,6 @@ namespace UniManagementSystem.Application.RepositoryInterfaces.CourseEnrollments
     {
         Task<CourseEnrollment> CreateCourseEnrollment(CourseEnrollment courseEnrollmentToCreate);
         Task<CourseEnrollment> DeleteCourseEnrollment(CourseEnrollment courseEnrollmentToRemove);
-        Task<IEnumerable<string>> GetAllCourseEnrollmentNameByStudentIdAsync(int studentId);
+        Task<IEnumerable<CourseEnrollmentViewModel>> GetAllStudentCourseEnrollmentsByStudentIdAsync(int studentId);
     }
 }
