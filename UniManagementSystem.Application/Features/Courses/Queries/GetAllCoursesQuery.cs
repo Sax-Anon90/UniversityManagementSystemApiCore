@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace UniManagementSystem.Application.Features.Courses.Queries
 {
-    internal class GetAllCoursesQuery
+    public class GetAllCoursesQuery
     {
+
     }
 }
