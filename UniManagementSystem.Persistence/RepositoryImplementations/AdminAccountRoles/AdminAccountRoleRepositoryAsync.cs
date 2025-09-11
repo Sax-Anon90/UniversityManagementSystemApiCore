@@ -46,9 +46,9 @@ namespace UniManagementSystem.Persistence.RepositoryImplementations.AdminAccount
         public async Task<IEnumerable<string>> GetAllAdminAccountRoleNamesByAdminAccountIdAsync(int adminAccountId)
         {
             var roleNames = await _dbContext.AdminAccountRoles
-                .Where(x => x.Id == adminAccountId)
                 .Include(x => x.Role)
                 .Include(x => x.AdminAccount)
+                .Where(x => x.AdminAccount.Id == adminAccountId)
                 .AsSplitQuery()
                 .Select(x => x.Role.Name).ToListAsync();
 
