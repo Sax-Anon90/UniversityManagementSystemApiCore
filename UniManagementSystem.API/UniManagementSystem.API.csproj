@@ -7,11 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Asp.Versioning.Mvc" Version="8.1.0" />
+    <PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="8.1.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\UniManagementSystem.Application\UniManagementSystem.Application.csproj" />
+    <ProjectReference Include="..\UniManagementSystem.Persistence\UniManagementSystem.Persistence.csproj" />
     <ProjectReference Include="..\UniManagementSystem.Tools\UniManagementSystem.Tools.csproj" />
   </ItemGroup>
 

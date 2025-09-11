@@ -16,6 +16,7 @@ using UniManagementSystem.Application.RepositoryInterfaces.StudentAccounts;
 using UniManagementSystem.Persistence.RepositoryImplementations.AdminAccountRoles;
 using UniManagementSystem.Persistence.RepositoryImplementations.AdminAccounts;
 using UniManagementSystem.Persistence.RepositoryImplementations.CourseCategories;
+using UniManagementSystem.Persistence.RepositoryImplementations.CourseEnrollments;
 using UniManagementSystem.Persistence.RepositoryImplementations.Courses;
 using UniManagementSystem.Persistence.RepositoryImplementations.Roles;
 using UniManagementSystem.Persistence.RepositoryImplementations.StudentAccounts;
@@ -33,14 +34,14 @@ namespace UniManagementSystem.Persistence.ServiceRegistrations
 
             var serviceProvider = services.BuildServiceProvider();
 
-            var dbContext = serviceProvider.GetRequiredService<DbContext>();
+            var dbContext = serviceProvider.GetRequiredService<UniManagementSystemDbContext>();
 
             dbContext.Database.MigrateAsync();
 
             services.AddScoped<IStudentAccountRepositoryAsync, StudentAccountRepositoryAsync>();
             services.AddScoped<IRoleRepositoryAsync, RoleRepositoryAsync>();
             services.AddScoped<ICourseRepositoryAsync, CourseRepositoryAsync>();
-            services.AddScoped<ICourseEnrollmentRepositoryAsync, ICourseEnrollmentRepositoryAsync>();
+            services.AddScoped<ICourseEnrollmentRepositoryAsync, CourseEnrollmentRepositoryAsync>();
             services.AddScoped<ICourseCategoryRepositoryAsync, CourseCategoryRepositoryAsync>();
             services.AddScoped<IAdminAccountRepositoryAsync, AdminAccountRepositoryAsync>();
             services.AddScoped<IAdminAccountRoleRepositoryAsync, AdminAccountRoleRepositoryAsync>();
