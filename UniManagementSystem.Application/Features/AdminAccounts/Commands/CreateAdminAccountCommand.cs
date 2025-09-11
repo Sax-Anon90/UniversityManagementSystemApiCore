@@ -34,7 +34,7 @@ namespace UniManagementSystem.Application.Features.AdminAccounts.Commands
         {
             //Check if student already registered
 
-            var admin = await _adminAccountRepositoryAsync.GetAdminAccountByEmailAsync(request.adminAccountToCreate.StudentEmail);
+            var admin = await _adminAccountRepositoryAsync.GetAdminAccountByEmailAsync(request.adminAccountToCreate.AdminEmail);
 
             if (admin.Id != 0)
             {

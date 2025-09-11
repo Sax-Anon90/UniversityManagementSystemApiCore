@@ -28,15 +28,19 @@ namespace UniManagementSystem.Persistence.ServiceRegistrations
     {
         public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
         {
+            var dbPath = Path.Combine(AppContext.BaseDirectory, "appdata", "UniManagementSystem.db");
+
+            Directory.CreateDirectory(Path.GetDirectoryName(dbPath)!);
+
             services.AddDbContext<UniManagementSystemDbContext>(options =>
-             options.UseSqlite($"Data Source={Path.Combine(AppContext.BaseDirectory, "appdata/UniManagementSystem.db")}"));
+                options.UseSqlite($"Data Source={dbPath}"));
 
 
             var serviceProvider = services.BuildServiceProvider();
 
             var dbContext = serviceProvider.GetRequiredService<UniManagementSystemDbContext>();
 
-            dbContext.Database.MigrateAsync();
+            dbContext.Database.Migrate();
 
             services.AddScoped<IStudentAccountRepositoryAsync, StudentAccountRepositoryAsync>();
             services.AddScoped<IRoleRepositoryAsync, RoleRepositoryAsync>();

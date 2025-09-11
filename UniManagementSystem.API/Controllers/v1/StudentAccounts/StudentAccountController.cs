@@ -22,7 +22,7 @@ namespace UniManagementSystem.API.Controllers.v1.StudentAccounts
         {
             var response = await Mediator.Send(new GetStudentAccountByIdQuery { StudentId = studentAccountId });
 
-            if (response.StatusCode == (int)HttpStatusCode.NotExtended)
+            if (response.StatusCode == (int)HttpStatusCode.NotFound)
                 return NotFound(response);
 
             return Ok(response);

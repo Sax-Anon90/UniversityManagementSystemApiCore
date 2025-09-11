@@ -78,7 +78,8 @@ namespace UniManagementSystem.Application.Features.StudentAccounts.Commands
                 StatusCode = (int)HttpStatusCode.Created,
                 Succeeded = true,
                 Message = "Student Account Regustered",
-                ResponseData = createdStudent;
+                ResponseData = createdStudent
+            };
         }
 
     }
