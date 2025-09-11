@@ -4,13 +4,14 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using UniManagementSystem.Application.RepositoryInterfaces.PasswordService;
 
 namespace UniManagementSystem.Tools.Password
 {
-    public static class PasswordService
+    public class PasswordService : IPasswordService
     {
 
-        public static string GetPasswordHash(string password)
+        public string GetPasswordHash(string password)
         {
             using (SHA512 sha512Hash = SHA512.Create())
             {

@@ -70,6 +70,18 @@ namespace UniManagementSystem.Persistence.RepositoryImplementations.StudentAccou
             return studentAccounts;
         }
 
+        public async Task<StudentAccount> GetStudentAccountByEmailAsync(string email)
+        {
+            var studentAccount = await _dbContext.StudentAccounts.AsNoTracking().SingleOrDefaultAsync(x => x.StudentEmail == email);
+
+            if (studentAccount is null)
+            {
+                return new StudentAccount() { Id = 0 };
+            }
+
+            return studentAccount;
+        }
+
         public async Task<StudentAccountViewModel> GetStudentAccountByIdAsync(int studentAccountId)
         {
             var studentAccount = await _dbContext.StudentAccounts.Select(x => new StudentAccountViewModel()

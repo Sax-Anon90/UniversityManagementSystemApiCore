@@ -2,12 +2,14 @@ using UniManagementSystem.API.Extensions;
 using UniManagementSystem.API.Middleware;
 using UniManagementSystem.Application.ServiceRegistration;
 using UniManagementSystem.Persistence.ServiceRegistrations;
+using UniManagementSystem.Tools.ServiceRegistration;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddApplicationServices();
 builder.Services.AddPersistenceServices(builder.Configuration);
+builder.Services.AddApplicationToolServices(builder.Configuration);
 
 builder.Services.AddControllers();
 

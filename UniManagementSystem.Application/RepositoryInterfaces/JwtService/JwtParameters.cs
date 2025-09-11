@@ -14,6 +14,5 @@ namespace UniManagementSystem.Application.RepositoryInterfaces.JwtService
         public StudentAccountViewModel studentData { get; set; }
         public AdminAccountViewModel AdminData { get; set; }
         public bool IsAdmin { get; set; }
-        public bool isStudent { get; set; }
     }
 }

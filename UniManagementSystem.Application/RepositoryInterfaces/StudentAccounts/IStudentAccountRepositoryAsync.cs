@@ -15,5 +15,6 @@ namespace UniManagementSystem.Application.RepositoryInterfaces.StudentAccounts
         Task<StudentAccount> CreateStudentAccountAsync(StudentAccount studentAccToCreate);
         Task<StudentAccount> UpdateStudentAccountAsync(StudentAccount studentAccToUpdate);
         Task<StudentAccount> DeleteStudentAccountAsync(StudentAccount studentAccountToRemove);
+        Task<StudentAccount> GetStudentAccountByEmailAsync(string email);
     }
 }
