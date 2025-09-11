@@ -11,6 +11,7 @@ namespace UniManagementSystem.Application.RepositoryInterfaces.Courses
     public interface ICourseRepositoryAsync
     {
         Task<IEnumerable<CourseViewModel>> GetAllCoursesAsync();
+        Task<IEnumerable<CourseViewModel>> GetAllCoursesByCourseCategoryId(int courseCategoryId);
         Task<Course> CreateCourseAsync(Course courseToCreate);
         Task<Course> UpdateCourseAsync(Course courseToUpdate);
         Task<Course> DeleteCourseAsync(Course courseToDelete);

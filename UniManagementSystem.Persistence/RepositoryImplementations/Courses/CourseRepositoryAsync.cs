@@ -47,15 +47,48 @@ namespace UniManagementSystem.Persistence.RepositoryImplementations.Courses
 
         public async Task<IEnumerable<CourseViewModel>> GetAllCoursesAsync()
         {
-            var courses = await _dbContext.Roles.Select(x => new CourseViewModel
+            var courses = await _dbContext.Courses
+                .Include(x => x.CourseCategory)
+                .AsSplitQuery()
+                .Select(x => new CourseViewModel
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    CourseCategory = x.CourseCategory.Name,
+                    CourseCategoryId = x.CourseCategory.Id  ,
+                    IsActive = x.IsActive,
+                    DateCreated = x.DateCreated,
+                    DateModified = x.DateModified,
+                    DateInactive = x.DateInactive,
+                })
+            .AsNoTracking()
+            .ToListAsync();
+
+            if (!courses.Any())
             {
-                Id = x.Id,
-                Name = x.Name,
-                IsActive = x.IsActive,
-                DateCreated = x.DateCreated,
-                DateModified = x.DateModified,
-                DateInactive = x.DateInactive,
-            })
+                return Enumerable.Empty<CourseViewModel>();
+            }
+
+            return courses;
+        }
+
+        public async Task<IEnumerable<CourseViewModel>> GetAllCoursesByCourseCategoryId(int courseCategoryId)
+        {
+            var courses = await _dbContext.Courses
+                .Include(x => x.CourseCategory)
+                .Where(x => x.CourseCategory.Id == courseCategoryId)
+                .AsSplitQuery()
+                .Select(x => new CourseViewModel
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    CourseCategory = x.CourseCategory.Name,
+                    CourseCategoryId = x.CourseCategory.Id,
+                    IsActive = x.IsActive,
+                    DateCreated = x.DateCreated,
+                    DateModified = x.DateModified,
+                    DateInactive = x.DateInactive,
+                })
             .AsNoTracking()
             .ToListAsync();
 
