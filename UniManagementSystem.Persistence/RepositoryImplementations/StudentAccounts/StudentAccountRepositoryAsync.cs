@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UniManagementSystem.Application.RepositoryInterfaces.StudentAccounts;
 using UniManagementSystem.Data.DomainEntities;
+using UniManagementSystem.Data.DomainModels.InputModels.Authentication;
 using UniManagementSystem.Data.DomainModels.ViewModels.StudentAccounts;
 using UniManagementSystem.Persistence.UniDbContext;
 
@@ -68,6 +69,35 @@ namespace UniManagementSystem.Persistence.RepositoryImplementations.StudentAccou
                 return Enumerable.Empty<StudentAccountViewModel>();
             }
             return studentAccounts;
+        }
+
+        public async Task<StudentAccountViewModel> GetStudentAccountByEmailAndPassawordHash(UserAuthDetailsModel authDetails)
+        {
+            var studentAccount = await _dbContext.StudentAccounts
+                .Where(x => x.StudentEmail == authDetails.Email && x.PasswordHash == authDetails.Password)
+                .Select(x => new StudentAccountViewModel()
+                {
+                    Id = x.Id,
+                    FirstName = x.FirstName,
+                    LastName = x.LastName,
+                    Gender = x.Gender,
+                    StudentEmail = x.StudentEmail,
+                    StudentNumber = x.StudentNumber,
+                    IsActive = x.IsActive,
+                    DateOfBirth = x.DateOfBirth,
+                    DateCreated = x.DateCreated,
+                    DateModified = x.DateModified,
+                    DateInactive = x.DateInactive
+
+
+                }).AsNoTracking().SingleOrDefaultAsync();
+
+            if (studentAccount is null)
+            {
+                return new StudentAccountViewModel() { Id = 0 };
+            }
+
+            return studentAccount;
         }
 
         public async Task<StudentAccount> GetStudentAccountByEmailAsync(string email)

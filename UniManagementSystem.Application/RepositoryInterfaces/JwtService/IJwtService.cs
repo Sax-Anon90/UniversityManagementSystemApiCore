@@ -8,6 +8,6 @@ namespace UniManagementSystem.Application.RepositoryInterfaces.JwtService
 {
     public interface IJwtService
     {
-        string GenerateJwtTokenForUserAsync(JwtParameters jwtParameters);
+        string GenerateJwtTokenForUser(JwtParameters jwtParameters);
     }
 }

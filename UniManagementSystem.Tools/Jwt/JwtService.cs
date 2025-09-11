@@ -19,18 +19,9 @@ namespace UniManagementSystem.Tools.Jwt
             this._configuration = _configuration;
         }
 
-        public string GenerateJwtTokenForUserAsync(JwtParameters jwtParameters)
+        public string GenerateJwtTokenForUser(JwtParameters jwtParameters)
         {
-            var AdminAccountRoleClaims = new List<Claim>();
-
-            if (jwtParameters.AdminAccountRoles.Count > 0)
-            {
-                foreach (var userRole in jwtParameters.AdminAccountRoles)
-                {
-                    AdminAccountRoleClaims.Add(new Claim(ClaimTypes.Role, userRole));
-                }
-            }
-
+            
             var claims = new List<Claim>
             {
 
@@ -39,6 +30,16 @@ namespace UniManagementSystem.Tools.Jwt
 
             if (jwtParameters.IsAdmin)
             {
+                var AdminAccountRoleClaims = new List<Claim>();
+
+                if (jwtParameters.AdminAccountRoles.Count > 0)
+                {
+                    foreach (var userRole in jwtParameters.AdminAccountRoles)
+                    {
+                        AdminAccountRoleClaims.Add(new Claim(ClaimTypes.Role, userRole));
+                    }
+                }
+
                 claims.Add(new Claim(JwtRegisteredClaimNames.NameId, jwtParameters.AdminData.Id.ToString()));
                 claims.Add(new Claim("AdminAccountId", jwtParameters.AdminData.Id.ToString()));
                 claims.Add(new Claim("UserType", "Admin"));
@@ -53,7 +54,6 @@ namespace UniManagementSystem.Tools.Jwt
                 claims.Add(new Claim("DisplayName", jwtParameters.studentData.FirstName));
                 claims.Add(new Claim(ClaimTypes.Role, "Student"));
             }
-
 
 
 

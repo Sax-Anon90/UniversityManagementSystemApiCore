@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UniManagementSystem.Data.DomainEntities;
+using UniManagementSystem.Data.DomainModels.InputModels.Authentication;
 using UniManagementSystem.Data.DomainModels.ViewModels.AdminAccounts;
 
 namespace UniManagementSystem.Application.RepositoryInterfaces.AdminAccounts
@@ -11,6 +12,7 @@ namespace UniManagementSystem.Application.RepositoryInterfaces.AdminAccounts
     public interface IAdminAccountRepositoryAsync
     {
         Task<IEnumerable<AdminAccountViewModel>> GetAllAdminAccountsAsync();
+        Task<AdminAccountViewModel> GetAdminAccountByEmailAndPasswordHash(UserAuthDetailsModel userAuthDetailsModel);
         Task<AdminAccountViewModel> GetAdminAccountByIdAsync(int adminAccountId);
         Task<AdminAccount> CreateAdminAccountAsync(AdminAccount adminAccountToCreate);
         Task<AdminAccount> UpdateAdminAccountAsync(AdminAccount adminAccountToUpdate);

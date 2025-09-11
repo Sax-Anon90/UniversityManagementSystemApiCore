@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UniManagementSystem.Application.RepositoryInterfaces.AdminAccounts;
 using UniManagementSystem.Data.DomainEntities;
+using UniManagementSystem.Data.DomainModels.InputModels.Authentication;
 using UniManagementSystem.Data.DomainModels.ViewModels.AdminAccounts;
 using UniManagementSystem.Data.DomainModels.ViewModels.StudentAccounts;
 using UniManagementSystem.Persistence.UniDbContext;
@@ -43,6 +44,33 @@ namespace UniManagementSystem.Persistence.RepositoryImplementations.AdminAccount
             return AdminAccount;
         }
 
+        public async Task<AdminAccountViewModel> GetAdminAccountByEmailAndPasswordHash(UserAuthDetailsModel userAuthDetailsModel)
+        {
+            var AdminAccount = await _dbContext.AdminAccounts
+                .Where(x => x.AdminEmail == userAuthDetailsModel.Email && x.PasswordHash == userAuthDetailsModel.Password)
+                .Select(x => new AdminAccountViewModel()
+                {
+                    Id = x.Id,
+                    FirstName = x.FirstName,
+                    LastName = x.LastName,
+                    Gender = x.Gender,
+                    IsActive = x.IsActive,
+                    DateOfBirth = x.DateOfBirth,
+                    DateCreated = x.DateCreated,
+                    DateModified = x.DateModified,
+                    DateInactive = x.DateInactive
+
+
+                }).AsNoTracking().SingleOrDefaultAsync();
+
+            if (AdminAccount is null)
+            {
+                return new AdminAccountViewModel() { Id = 0 };
+            }
+
+            return AdminAccount;
+        }
+
         public async Task<AdminAccount> GetAdminAccountByEmailAsync(string email)
         {
             var AdminAccount = await _dbContext.AdminAccounts.AsNoTracking().SingleOrDefaultAsync(x => x.AdminEmail == email);
@@ -57,7 +85,7 @@ namespace UniManagementSystem.Persistence.RepositoryImplementations.AdminAccount
 
         public async Task<AdminAccountViewModel> GetAdminAccountByIdAsync(int adminAccountId)
         {
-            var AdminAccount = await _dbContext.StudentAccounts.Select(x => new AdminAccountViewModel()
+            var AdminAccount = await _dbContext.AdminAccounts.Select(x => new AdminAccountViewModel()
             {
                 Id = x.Id,
                 FirstName = x.FirstName,
@@ -82,7 +110,7 @@ namespace UniManagementSystem.Persistence.RepositoryImplementations.AdminAccount
 
         public async Task<IEnumerable<AdminAccountViewModel>> GetAllAdminAccountsAsync()
         {
-            var AdminAccounts = await _dbContext.StudentAccounts.Select(x => new AdminAccountViewModel()
+            var AdminAccounts = await _dbContext.AdminAccounts.Select(x => new AdminAccountViewModel()
             {
                 Id = x.Id,
                 FirstName = x.FirstName,
