@@ -60,6 +60,7 @@ namespace UniManagementSystem.Application.Features.AdminAccounts.Commands
                 DateOfBirth = request.adminAccountToCreate.DateOfBirth,
                 Gender = request.adminAccountToCreate.Gender,
                 IsActive = true,
+                AdminEmail = request.adminAccountToCreate.AdminEmail,
                 PasswordHash = hashedPassword,
                 DateCreated = DateTime.UtcNow,
                 DateModified = DateTime.UtcNow,
