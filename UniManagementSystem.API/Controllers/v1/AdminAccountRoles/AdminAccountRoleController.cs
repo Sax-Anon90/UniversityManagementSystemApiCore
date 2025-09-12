@@ -20,7 +20,7 @@ namespace UniManagementSystem.API.Controllers.v1.AdminAccountRoles
 
 
         [HttpPost]
-        public async Task<IActionResult> CreateAdminAccountRole([FromBody] CreateCourseEnrollmentComand command)
+        public async Task<IActionResult> CreateAdminAccountRole([FromBody] CreateAdminAccountRoleCommand command)
         {
             var result = await Mediator.Send(command);
 

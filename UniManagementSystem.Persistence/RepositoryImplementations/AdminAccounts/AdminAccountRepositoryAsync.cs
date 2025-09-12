@@ -116,6 +116,7 @@ namespace UniManagementSystem.Persistence.RepositoryImplementations.AdminAccount
                 FirstName = x.FirstName,
                 LastName = x.LastName,
                 Gender = x.Gender,
+                AdminEmail = x.AdminEmail,
                 IsActive = x.IsActive,
                 DateOfBirth = x.DateOfBirth,
                 DateCreated = x.DateCreated,

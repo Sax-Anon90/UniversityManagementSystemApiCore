@@ -44,7 +44,7 @@ namespace UniManagementSystem.Tools.Jwt
                 claims.Add(new Claim("AdminAccountId", jwtParameters.AdminData.Id.ToString()));
                 claims.Add(new Claim("UserType", "Admin"));
                 claims.Add(new Claim("DisplayName", jwtParameters.AdminData.FirstName));
-                claims.Union(AdminAccountRoleClaims);
+                claims.AddRange(AdminAccountRoleClaims);
             }
             else
             {
