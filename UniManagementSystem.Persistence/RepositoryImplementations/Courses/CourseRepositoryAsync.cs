@@ -49,6 +49,7 @@ namespace UniManagementSystem.Persistence.RepositoryImplementations.Courses
         {
             var courses = await _dbContext.Courses
                 .Include(x => x.CourseCategory)
+                .Where(x => x.CourseCategory.IsActive == true)
                 .AsSplitQuery()
                 .Select(x => new CourseViewModel
                 {
@@ -76,7 +77,7 @@ namespace UniManagementSystem.Persistence.RepositoryImplementations.Courses
         {
             var courses = await _dbContext.Courses
                 .Include(x => x.CourseCategory)
-                .Where(x => x.CourseCategory.Id == courseCategoryId)
+                .Where(x => x.CourseCategory.Id == courseCategoryId && x.IsActive == true)
                 .AsSplitQuery()
                 .Select(x => new CourseViewModel
                 {
@@ -103,6 +104,8 @@ namespace UniManagementSystem.Persistence.RepositoryImplementations.Courses
         public async Task<CourseViewModel> GetCourseByIdAsync(int courseId)
         {
             var course = await _dbContext.Courses
+                .Include(x => x.CourseCategory)
+                .Where(x => x.CourseCategory.IsActive == true)
                  .Select(x => new CourseViewModel
                  {
                      Id = x.Id,
@@ -115,6 +118,7 @@ namespace UniManagementSystem.Persistence.RepositoryImplementations.Courses
                      DateInactive = x.DateInactive,
                  })
              .AsNoTracking()
+
              .SingleOrDefaultAsync(x => x.Id == courseId);
 
             if (course is null)
