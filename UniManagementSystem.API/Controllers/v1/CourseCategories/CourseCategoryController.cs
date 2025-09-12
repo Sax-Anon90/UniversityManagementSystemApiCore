@@ -33,7 +33,7 @@ namespace UniManagementSystem.API.Controllers.v1.CourseCategories
             if (result.StatusCode == (int)HttpStatusCode.NotFound)
                 return BadRequest(result);
 
-            return StatusCode((int)HttpStatusCode.Created, result);
+            return Ok(result);
         }
     }
 }

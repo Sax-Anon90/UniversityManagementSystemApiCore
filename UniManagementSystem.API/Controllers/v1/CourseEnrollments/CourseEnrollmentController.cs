@@ -9,10 +9,10 @@ namespace UniManagementSystem.API.Controllers.v1.CourseEnrollments
 {
     public class CourseEnrollmentController : BaseController
     {
-        [HttpGet("{Id}")]
-        public async Task<IActionResult> GetCourseEnrollmentsByStudentId(int studentId)
+        [HttpGet("{studentAccountId}")]
+        public async Task<IActionResult> GetCourseEnrollmentsByStudentId(int studentAccountId)
         {
-            return Ok(Mediator.Send(new GetAllStudentCourseEnrollmentsByIdQuery() { studentAccountId = studentId }));
+            return Ok(Mediator.Send(new GetAllStudentCourseEnrollmentsByIdQuery() { studentAccountId = studentAccountId }));
         }
 
         [HttpPost]

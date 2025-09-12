@@ -53,6 +53,7 @@ namespace UniManagementSystem.Persistence.RepositoryImplementations.CourseEnroll
                     Id = x.Id,
                     StudentId = x.Student.Id,
                     StudentNumber = x.Student.StudentNumber,
+                    StudentFullName = x.Student.FirstName + "" + x.Student.LastName,
                     CourseId = x.Course.Id,
                     CourseName = x.Course.Name,
                     DateCreated = x.DateCreated,
