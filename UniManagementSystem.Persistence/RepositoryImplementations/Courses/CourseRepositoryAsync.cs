@@ -55,7 +55,7 @@ namespace UniManagementSystem.Persistence.RepositoryImplementations.Courses
                     Id = x.Id,
                     Name = x.Name,
                     CourseCategory = x.CourseCategory.Name,
-                    CourseCategoryId = x.CourseCategory.Id  ,
+                    CourseCategoryId = x.CourseCategory.Id,
                     IsActive = x.IsActive,
                     DateCreated = x.DateCreated,
                     DateModified = x.DateModified,
@@ -98,6 +98,31 @@ namespace UniManagementSystem.Persistence.RepositoryImplementations.Courses
             }
 
             return courses;
+        }
+
+        public async Task<CourseViewModel> GetCourseByIdAsync(int courseId)
+        {
+            var course = await _dbContext.Courses
+                 .Select(x => new CourseViewModel
+                 {
+                     Id = x.Id,
+                     Name = x.Name,
+                     CourseCategory = x.CourseCategory.Name,
+                     CourseCategoryId = x.CourseCategory.Id,
+                     IsActive = x.IsActive,
+                     DateCreated = x.DateCreated,
+                     DateModified = x.DateModified,
+                     DateInactive = x.DateInactive,
+                 })
+             .AsNoTracking()
+             .SingleOrDefaultAsync(x => x.Id == courseId);
+
+            if (course is null)
+            {
+                return new CourseViewModel() { Id = 0 };
+            }
+
+            return course;
         }
 
         public async Task<Course> UpdateCourseAsync(Course courseToUpdate)

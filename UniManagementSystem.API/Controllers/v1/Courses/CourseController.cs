@@ -3,6 +3,7 @@ using System.Net;
 using UniManagementSystem.API.Controllers.v1.BaseApiController;
 using UniManagementSystem.Application.Features.Courses.Commands;
 using UniManagementSystem.Application.Features.Courses.Queries;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace UniManagementSystem.API.Controllers.v1.Courses
 {
@@ -13,6 +14,18 @@ namespace UniManagementSystem.API.Controllers.v1.Courses
         {
             return Ok(await Mediator.Send(new GetAllCoursesQuery()));
         }
+
+        [HttpGet("{courseId}")]
+        public async Task<IActionResult> GetCourseById(int courseId)
+        {
+            var result = await Mediator.Send(new GetCourseByIdQuery() { courseId = courseId });
+
+            if (result.StatusCode == (int)HttpStatusCode.NotFound)
+                return BadRequest(result);
+
+            return Ok(result);
+        }
+
 
         [HttpGet("courseCategory/{courseCategoryId}")]
         public async Task<IActionResult> GetAllCoursesByCourseCategoryId(int courseCategoryId)
