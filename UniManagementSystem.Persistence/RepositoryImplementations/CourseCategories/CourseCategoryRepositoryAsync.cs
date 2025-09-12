@@ -77,7 +77,7 @@ namespace UniManagementSystem.Persistence.RepositoryImplementations.CourseCatego
             }
 
             courseCategory.IsActive = true;
-            courseCategory.Name = courseCategory.Name;
+            courseCategory.Name = courseCategoryToUpdate.Name;
             _dbContext.CoursesCategories.Update(courseCategory);
             await _dbContext.SaveChangesAsync();
             return courseCategory;
