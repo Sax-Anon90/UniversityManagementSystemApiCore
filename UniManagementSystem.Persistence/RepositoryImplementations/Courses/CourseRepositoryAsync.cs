@@ -140,6 +140,7 @@ namespace UniManagementSystem.Persistence.RepositoryImplementations.Courses
 
             course.IsActive = true;
             course.Name = courseToUpdate.Name;
+            course.CourseCategoryId = courseToUpdate.CourseCategoryId;
             course.DateModified = courseToUpdate.DateModified;
             _dbContext.Courses.Update(course);
             await _dbContext.SaveChangesAsync();
