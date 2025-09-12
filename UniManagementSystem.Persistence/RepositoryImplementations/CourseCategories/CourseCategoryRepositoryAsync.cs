@@ -67,6 +67,28 @@ namespace UniManagementSystem.Persistence.RepositoryImplementations.CourseCatego
             return courseCategories;
         }
 
+        public async Task<CourseCategoryViewModel> GetCourseCategoryById(int courseCategoryId)
+        {
+            var courseCategory = await _dbContext.CoursesCategories.Select(x => new CourseCategoryViewModel
+            {
+                Id = x.Id,
+                Name = x.Name,
+                IsActive = x.IsActive,
+                DateCreated = x.DateCreated,
+                DateModified = x.DateModified,
+                DateInactive = x.DateInactive,
+            })
+            .AsNoTracking()
+            .SingleOrDefaultAsync(x => x.Id == courseCategoryId);
+
+            if (courseCategory is null)
+            {
+                return new CourseCategoryViewModel() { Id = 0 };
+            }
+
+            return courseCategory;
+        }
+
         public async Task<CourseCategory> UpdateCourseCategoryAsync(CourseCategory courseCategoryToUpdate)
         {
             var courseCategory = await _dbContext.CoursesCategories.AsNoTracking().SingleOrDefaultAsync(x => x.Id == courseCategoryToUpdate.Id);
