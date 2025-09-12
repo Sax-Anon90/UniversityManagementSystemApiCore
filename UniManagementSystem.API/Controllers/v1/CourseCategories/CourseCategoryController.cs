@@ -6,6 +6,7 @@ using UniManagementSystem.Application.Features.CourseCategories.Commands;
 using UniManagementSystem.Application.Features.CourseCategories.Queries;
 using UniManagementSystem.Application.Features.Courses.Commands;
 using UniManagementSystem.Application.Features.Courses.Queries;
+using UniManagementSystem.Data.DomainEntities;
 
 namespace UniManagementSystem.API.Controllers.v1.CourseCategories
 {
@@ -36,6 +37,17 @@ namespace UniManagementSystem.API.Controllers.v1.CourseCategories
         public async Task<IActionResult> UpdateCourseCategory([FromBody] UpdateCourseCategoryCommand command)
         {
             var result = await Mediator.Send(command);
+
+            if (result.StatusCode == (int)HttpStatusCode.NotFound)
+                return BadRequest(result);
+
+            return Ok(result);
+        }
+
+        [HttpDelete("{courseCategoryId}")]
+        public async Task<IActionResult> DeleteCourse(int courseCategoryId)
+        {
+            var result = await Mediator.Send(new DeleteCourseCategoryCommand() { CourseCategoryId = courseCategoryId });
 
             if (result.StatusCode == (int)HttpStatusCode.NotFound)
                 return BadRequest(result);

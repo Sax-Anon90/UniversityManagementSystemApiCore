@@ -51,5 +51,16 @@ namespace UniManagementSystem.API.Controllers.v1.Courses
 
             return Ok(result);
         }
+
+        [HttpDelete("{courseId}")]
+        public async Task<IActionResult> DeleteCourse(int courseId)
+        {
+            var result = await Mediator.Send(new DeleteCourseCommand() { CourseId = courseId });
+
+            if (result.StatusCode == (int)HttpStatusCode.NotFound)
+                return BadRequest(result);
+
+            return Ok(result);
+        }
     }
 }
