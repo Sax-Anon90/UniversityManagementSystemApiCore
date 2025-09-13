@@ -69,17 +69,19 @@ namespace UniManagementSystem.Persistence.RepositoryImplementations.CourseCatego
 
         public async Task<CourseCategoryViewModel> GetCourseCategoryById(int courseCategoryId)
         {
-            var courseCategory = await _dbContext.CoursesCategories.Select(x => new CourseCategoryViewModel
-            {
-                Id = x.Id,
-                Name = x.Name,
-                IsActive = x.IsActive,
-                DateCreated = x.DateCreated,
-                DateModified = x.DateModified,
-                DateInactive = x.DateInactive,
-            })
+            var courseCategory = await _dbContext.CoursesCategories
+                .Where(x => x.Id == courseCategoryId)
+                .Select(x => new CourseCategoryViewModel
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    IsActive = x.IsActive,
+                    DateCreated = x.DateCreated,
+                    DateModified = x.DateModified,
+                    DateInactive = x.DateInactive,
+                })
             .AsNoTracking()
-            .SingleOrDefaultAsync(x => x.Id == courseCategoryId);
+            .SingleOrDefaultAsync();
 
             if (courseCategory is null)
             {
