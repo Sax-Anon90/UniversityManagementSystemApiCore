@@ -48,7 +48,7 @@ namespace UniManagementSystem.Application.Features.StudentAccounts.Commands
             return new BaseResponse<StudentAccount>()
             {
                 StatusCode = (int)HttpStatusCode.OK,
-                Succeeded = false,
+                Succeeded = true,
                 Message = "Student successfully removed",
                 ResponseData = response,
             };
