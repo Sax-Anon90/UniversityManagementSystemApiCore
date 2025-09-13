@@ -38,7 +38,7 @@ namespace UniManagementSystem.Persistence.RepositoryImplementations.StudentAccou
 
             studentAccount.IsActive = false;
             studentAccount.DateInactive = DateTime.UtcNow;
-            _dbContext.StudentAccounts.Update(studentAccountToRemove);
+            _dbContext.StudentAccounts.Update(studentAccount);
             await _dbContext.SaveChangesAsync();
             return studentAccount;
         }
