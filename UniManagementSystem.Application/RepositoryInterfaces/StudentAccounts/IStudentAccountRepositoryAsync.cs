@@ -13,7 +13,6 @@ namespace UniManagementSystem.Application.RepositoryInterfaces.StudentAccounts
     {
         Task<StudentAccountViewModel> GetStudentAccountByIdAsync(int studentAccountId);
         Task<IEnumerable<StudentAccountViewModel>> GetAllStudentAccountsAsync();
-        Task<IEnumerable<StudentAccountViewModel>> GetAllInactiveStudentAccountsAsync();
 
         Task<StudentAccountViewModel> GetStudentAccountByEmailAndPassawordHash(UserAuthDetailsModel authDetails);
         Task<StudentAccount> CreateStudentAccountAsync(StudentAccount studentAccToCreate);
