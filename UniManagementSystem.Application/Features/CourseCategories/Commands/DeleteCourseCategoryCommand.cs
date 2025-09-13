@@ -46,7 +46,7 @@ namespace UniManagementSystem.Application.Features.CourseCategories.Commands
             return new BaseResponse<CourseCategory>()
             {
                 StatusCode = (int)HttpStatusCode.OK,
-                Succeeded = false,
+                Succeeded = true,
                 Message = "Record successfully removed",
                 ResponseData = response,
             };
