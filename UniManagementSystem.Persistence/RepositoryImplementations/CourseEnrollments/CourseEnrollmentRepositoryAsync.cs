@@ -51,6 +51,7 @@ namespace UniManagementSystem.Persistence.RepositoryImplementations.CourseEnroll
                 .ThenInclude(x=> x.CourseCategory)
                 .Where(x => x.Course.IsActive == true)
                 .Where(x => x.Course.CourseCategory.IsActive == true)
+                .Where(x => x.StudentId == studentId)
                 .Select(x => new CourseEnrollmentViewModel
                 {
                     Id = x.Id,
@@ -64,7 +65,6 @@ namespace UniManagementSystem.Persistence.RepositoryImplementations.CourseEnroll
                     DateModified = x.DateModified,
                     DateInactive = x.DateInactive,
                 })
-                .Where(x => x.Id == studentId)
                 .AsNoTracking()
                 .ToListAsync();
 
