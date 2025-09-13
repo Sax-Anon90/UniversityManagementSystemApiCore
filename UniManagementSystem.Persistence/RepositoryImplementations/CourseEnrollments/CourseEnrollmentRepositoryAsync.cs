@@ -48,12 +48,16 @@ namespace UniManagementSystem.Persistence.RepositoryImplementations.CourseEnroll
             var courseEnrollments = await _dbContext.CourseEnrollments
                 .Include(x => x.Student)
                 .Include(x => x.Course)
+                .ThenInclude(x=> x.CourseCategory)
+                .Where(x => x.Course.IsActive == true)
+                .Where(x => x.Course.CourseCategory.IsActive == true)
                 .Select(x => new CourseEnrollmentViewModel
                 {
                     Id = x.Id,
                     StudentId = x.Student.Id,
                     StudentNumber = x.Student.StudentNumber,
                     StudentFullName = x.Student.FirstName + "" + x.Student.LastName,
+                    CourseCategory = x.Course.CourseCategory.Name,
                     CourseId = x.Course.Id,
                     CourseName = x.Course.Name,
                     DateCreated = x.DateCreated,
