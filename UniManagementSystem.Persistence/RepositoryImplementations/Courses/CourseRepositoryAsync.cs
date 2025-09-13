@@ -78,6 +78,7 @@ namespace UniManagementSystem.Persistence.RepositoryImplementations.Courses
             var courses = await _dbContext.Courses
                 .Include(x => x.CourseCategory)
                 .Where(x => x.CourseCategory.Id == courseCategoryId && x.IsActive == true)
+                .Where(x => x.CourseCategory.IsActive == true)
                 .AsSplitQuery()
                 .Select(x => new CourseViewModel
                 {
