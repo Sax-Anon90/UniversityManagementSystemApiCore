@@ -109,6 +109,19 @@ namespace UniManagementSystem.Application.Features.Authentication.Commands
             }
 
             //Student that has logged in
+
+            if (studentAccount.IsActive == false)
+            {
+                return new BaseResponse<AuthUserResponse>()
+                {
+                    StatusCode = (int)HttpStatusCode.Unauthorized,
+                    Succeeded = false,
+                    Message = "Account not active",
+                    ResponseData = null,
+                    ProblemErrors = new List<string>() { "Account not active" }
+                };
+            }
+
             TokenParameters.AdminAccountRoles = null;
             TokenParameters.studentData = studentAccount;
             TokenParameters.AdminData = null;

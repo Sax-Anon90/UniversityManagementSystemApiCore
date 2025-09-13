@@ -43,6 +43,35 @@ namespace UniManagementSystem.Persistence.RepositoryImplementations.StudentAccou
             return studentAccount;
         }
 
+        public async Task<IEnumerable<StudentAccountViewModel>> GetAllInactiveStudentAccountsAsync()
+        {
+            var studentAccounts = await _dbContext.StudentAccounts.Select(x => new StudentAccountViewModel()
+            {
+                Id = x.Id,
+                FirstName = x.FirstName,
+                LastName = x.LastName,
+                Gender = x.Gender,
+                StudentEmail = x.StudentEmail,
+                StudentNumber = x.StudentNumber,
+                IsActive = x.IsActive,
+                DateOfBirth = x.DateOfBirth,
+                DateCreated = x.DateCreated,
+                DateModified = x.DateModified,
+                DateInactive = x.DateInactive
+
+
+            })
+            .Where(x => x.IsActive == false)
+           .AsNoTracking()
+           .ToListAsync();
+
+            if (!studentAccounts.Any())
+            {
+                return Enumerable.Empty<StudentAccountViewModel>();
+            }
+            return studentAccounts;
+        }
+
         public async Task<IEnumerable<StudentAccountViewModel>> GetAllStudentAccountsAsync()
         {
             var studentAccounts = await _dbContext.StudentAccounts.Select(x => new StudentAccountViewModel()

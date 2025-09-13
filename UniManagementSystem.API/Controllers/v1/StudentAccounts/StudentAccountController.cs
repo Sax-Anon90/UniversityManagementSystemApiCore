@@ -28,6 +28,12 @@ namespace UniManagementSystem.API.Controllers.v1.StudentAccounts
             return Ok(response);
         }
 
+        [HttpGet("Inactive")]
+        public async Task<IActionResult> GetInactiveStudentAccounts()
+        {
+            return Ok(await Mediator.Send(new GetInactiveStudentAccountsQuery()));
+        }
+
         [HttpPost]
         public async Task<IActionResult> RegisterStudentAccount([FromBody] RegisterStudentAccountCommand command)
         {
@@ -50,10 +56,10 @@ namespace UniManagementSystem.API.Controllers.v1.StudentAccounts
             return Ok(result);
         }
 
-        [HttpDelete]
-        public async Task<IActionResult> DeleteStudentAccount([FromBody] DeleteStudentAccountCommand command)
+        [HttpDelete("{studentAccountId}")]
+        public async Task<IActionResult> DeleteStudentAccount(int studentAccountId)
         {
-            var result = await Mediator.Send(command);
+            var result = await Mediator.Send(new DeleteStudentAccountCommand() { studentAccountId = studentAccountId });
 
             if (result.StatusCode == (int)HttpStatusCode.NotFound)
                 return NotFound(result);
