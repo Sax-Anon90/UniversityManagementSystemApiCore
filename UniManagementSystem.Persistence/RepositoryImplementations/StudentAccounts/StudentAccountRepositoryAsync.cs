@@ -155,7 +155,7 @@ namespace UniManagementSystem.Persistence.RepositoryImplementations.StudentAccou
             studentAccount.DateOfBirth = studentAccToUpdate.DateOfBirth;
             studentAccount.StudentEmail = studentAccToUpdate.StudentEmail;
             studentAccount.IsActive = studentAccToUpdate.IsActive;
-            studentAccount.StudentNumber = studentAccToUpdate.StudentNumber;
+            studentAccount.StudentNumber = studentAccount.StudentNumber;
             studentAccount.DateModified = DateTime.UtcNow;
 
             _dbContext.StudentAccounts.Update(studentAccount);
