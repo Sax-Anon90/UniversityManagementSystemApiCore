@@ -12,7 +12,7 @@ namespace UniManagementSystem.API.Controllers.v1.CourseEnrollments
         [HttpGet("{studentAccountId}")]
         public async Task<IActionResult> GetCourseEnrollmentsByStudentId(int studentAccountId)
         {
-            return Ok(Mediator.Send(new GetAllStudentCourseEnrollmentsByIdQuery() { studentAccountId = studentAccountId }));
+            return Ok(await Mediator.Send(new GetAllStudentCourseEnrollmentsByIdQuery() { studentAccountId = studentAccountId }));
         }
 
         [HttpPost]
