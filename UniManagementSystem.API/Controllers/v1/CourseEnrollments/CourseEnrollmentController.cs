@@ -23,10 +23,10 @@ namespace UniManagementSystem.API.Controllers.v1.CourseEnrollments
             return StatusCode((int)HttpStatusCode.Created, result);
         }
 
-        [HttpDelete]
-        public async Task<IActionResult> DeleteCourseEnrollment([FromBody] DeleteCourseEnrollmentCommand command)
+        [HttpDelete("{courseEnrollmentId}")]
+        public async Task<IActionResult> DeleteCourseEnrollment(int courseEnrollmentId)
         {
-            var result = await Mediator.Send(command);
+            var result = await Mediator.Send(new DeleteCourseEnrollmentCommand() { courseEnrollmentId = courseEnrollmentId });
 
             if (result.StatusCode == (int)HttpStatusCode.NotFound)
                 return NotFound(result);
